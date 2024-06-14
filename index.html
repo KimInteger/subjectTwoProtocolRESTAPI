@@ -29,12 +29,32 @@
       const root = document.getElementById('root');
       const appearInfo = document.createElement('button');
       appearInfo.textContent = '200개의 텍스트가 나오는 버튼'
+      let info = '';
+      data.forEach((item)=>{
+        if(item.userId === 1){
+          info += `<h1>${item.title}</h1>`
+        } else if (item.userId === 2) {
+          info += `<h2>${item.title}</h2>`
+        } else if ( item.userId === 3 ) {
+          info += `<p style="color:red;">${item.title}</p>`
+        } else if ( item.userId === 4 ) {
+          info += `<p style="color:orange;">${item.title}</p>`
+        } else if ( item.userId === 5 ) {
+          info += `<p style="color:yellow;">${item.title}</p>`
+        } else if ( item.userId === 6 ) {
+          info += `<p style="color:green;">${item.title}</p>`
+        } else if ( item.userId === 7 ) {
+          info += `<p style="color:blue;">${item.title}</p>`
+        } else if ( item.userId === 8 ) {
+          info += `<p style="color:darkblue;">${item.title}</p>`
+        } else if ( item.userId === 9 ) {
+          info += `<p style="color:violet;">${item.title}</p>`
+        } else {
+          info += `<p style="color:bisque;">${item.title}</p>`
+        }
+      });
       appearInfo.addEventListener('click',()=>{
-        data.forEach((item)=>{
-          const info = document.createElement('p');
-          info.textContent = item.title;
-          root.appendChild(info);
-        });
+        root.innerHTML = info;
       });
       root.append(appearInfo);
     });
