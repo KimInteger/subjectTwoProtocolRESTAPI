@@ -43,15 +43,17 @@
         root.style.fontWeight = 'bold';
       });
 
+      function removeAppear() {
+        setTimeout(()=>{
+          appearInfo.removeEventListener('click',appearText);
+          },16);
+      }
+
       function clearFiled() {
         root.textContent = '';
         root.style.fontWeight = '';
         appearInfo.addEventListener('click', appearText);
-        appearInfo.addEventListener('click', ()=>{
-        setTimeout(()=>{
-          appearInfo.removeEventListener('click',appearText);
-          },16);
-        });
+        appearInfo.addEventListener('click', removeAppear);
 
         root.appendChild(appearInfo);
         root.appendChild(clearInfo);
@@ -72,11 +74,7 @@
       };
       
       appearInfo.addEventListener('click', appearText);
-      appearInfo.addEventListener('click', ()=>{
-        setTimeout(()=>{
-          appearInfo.removeEventListener('click',appearText);
-        },1000);
-      });
+      appearInfo.addEventListener('click', removeAppear);
 
       clearInfo.addEventListener('click',clearFiled);
 
