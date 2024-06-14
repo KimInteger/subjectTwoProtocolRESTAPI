@@ -6,142 +6,18 @@
   <title>네트워크 및 API</title>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <button id="test">핼로우</button>
+  </div>
   <script>
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET','https://jsonplaceholder.typicode.com/todos');
-    xhr.addEventListener('load',()=>{
-      if (xhr.status === 200) {
-        console.log('연결 되었다!');
-      } else {
-        return new Error('연결안됫수!' + xhr.status);
-      }
-      let result = xhr.responseText;
+    const test = document.getElementById('test');
 
-      let data = JSON.parse(result);
+    test.addEventListener('click',()=>{
+      let xhr = new XMLHttpRequest();
 
-      console.log(data[0].id);
-
-      /*
-      ================ DOM API 조작 부분 ====================
-      */
-    
-      // 브라우저를 핸들링하기 위해 root를 식별하고 할당.
-      const root = document.getElementById('root');
-
-      // search Id 부분
-
-      const searchIdDiv = document.createElement('div');
-      searchIdDiv.style.height = '100px';
-      searchIdDiv.style.alignContent = 'center';
-
-      const searchId = document.createElement('input');
-      searchId.setAttribute('type','text');
-      searchId.setAttribute('placeholder','1~200까지의 숫자를 입력해주세요.');
-      searchId.style.width = '250px';
-
-      const searchIdBtn = document.createElement('button');
-      searchIdBtn.textContent = 'title을 출력';
-      searchIdBtn.style.marginLeft = '20px';
-
-      searchIdDiv.appendChild(searchId);
-      searchIdDiv.appendChild(searchIdBtn);
-
-      // btn관련 style할당
-
-      const appearInfoAll = document.createElement('button');
-      appearInfoAll.textContent = '200개의 텍스트가 나오는 버튼';
-
-      const clearInfo = document.createElement('button');
-      clearInfo.textContent = '지우기';
-      clearInfo.style.marginLeft = '20px';
-
-      const makeBold = document.createElement('button');
-      makeBold.textContent = '굵게!';
-      makeBold.style.marginLeft = '20px';
-
-
-      // 함수 선언 및 이벤트 할당
-
-      // id를 근거로 title을 출력하기 위한 함수입니다.
-      function searchIdToTitle() {
-        if(Number(searchId.value) === data[Number(searchId.value)-1].id){
-          clearFiled();
-          let searchTitle = document.createElement('p');
-          searchTitle.textContent = data[Number(searchId.value)-1].title;
-          root.appendChild(searchTitle);
-          searchId.value = '';
-        } 
-      }
-
-      // 브라우저를 태초의 상태로 되돌려놓는 개념의 함수입니다.
-      // root를 비우고 기존에 append한 요소들을 다시 append합니다.
-      function clearFiled() {
-        root.textContent = '';
-        root.style.fontWeight = '';
-
-        appearInfoAll.addEventListener('click', appearTextAll);
-        appearInfoAll.addEventListener('click', removeAppear);
-
-        searchIdDiv.appendChild(searchId);
-        searchIdDiv.appendChild(searchIdBtn);
-        root.appendChild(searchIdDiv);
-        root.appendChild(appearInfoAll);
-        root.appendChild(clearInfo);
-        root.appendChild(makeBold);
-      }
-
-      // 모든 텍스트를 한번에 출력하는 함수입니다.
-      // 함수의 userId를 기준으로 색상을 나누었습니다.
-      function appearTextAll() {
-        clearFiled();
-        let userid = [1,2,3,4,5,6,7,8,9,10];
-        let tColor = ['red','orange','yellow','green','skyblue','blue','darkblue','purple','violet','whitesmoke']
-        data.forEach((item)=>{
-          let info = document.createElement('p');
-          if( item.userId === userid[item.userId - 1] ) {
-            info.textContent = item.title;
-            info.style.color = tColor[item.userId - 1];
-            root.appendChild(info);
-          }
-        });
-      };
-      
-      // appearInfoAll을 한번만 실행하도록 하기위한 함수입니다.
-      function removeAppear() {
-        setTimeout(()=>{
-          appearInfoAll.removeEventListener('click',appearTextAll);
-          },16);
-      }
-      
-      // 텍스트의 굵기를 조정합니다. blod체만 사용할 수 있게 하였지만,
-      // 매개변수를 삽입할 경우 굵기를 조정할 수 있습니다.
-      makeBold.addEventListener('click',()=>{
-        if(root.children.length < 5){
-          return;
-        }
-        root.style.fontWeight = 'bold';
-      });
-
-      searchIdBtn.addEventListener('click', searchIdToTitle);
-
-      appearInfoAll.addEventListener('click', appearTextAll);
-
-      appearInfoAll.addEventListener('click', removeAppear);
-
-      clearInfo.addEventListener('click',clearFiled);
-
-      // root에 append하는부분
-
-      root.appendChild(searchIdDiv);
-      
-      root.appendChild(appearInfoAll);
-
-      root.appendChild(clearInfo);
-
-      root.appendChild(makeBold);
+      xhr.open('post','/delete');
+      xhr.send();
     });
-    xhr.send();
   </script>
 </body>
 </html>
