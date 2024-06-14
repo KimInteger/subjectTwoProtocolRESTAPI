@@ -6,12 +6,7 @@
   <title>네트워크 및 API</title>
 </head>
 <body>
-  <div id="root">
-    <div>
-      <input type="number" placeholder="1~200까지의 숫자를 입력해보세요!">
-      <button>tilte출력</button>
-    </div>
-  </div>
+  <div id="root"></div>
   <script>
     const xhr = new XMLHttpRequest();
     xhr.open('GET','https://jsonplaceholder.typicode.com/todos');
@@ -33,6 +28,22 @@
     
       const root = document.getElementById('root');
 
+      const searchIdDiv = document.createElement('div');
+      searchIdDiv.style.height = '100px';
+      searchIdDiv.style.alignContent = 'center';
+
+      const searchId = document.createElement('input');
+      searchId.setAttribute('type','text');
+      searchId.setAttribute('placeholder','1~200까지의 숫자를 입력해주세요.');
+      searchId.style.width = '250px';
+
+      const searchIdBtn = document.createElement('button');
+      searchIdBtn.textContent = 'title을 출력';
+      searchIdBtn.style.marginLeft = '20px';
+
+      searchIdDiv.appendChild(searchId);
+      searchIdDiv.appendChild(searchIdBtn);
+
       const appearInfoAll = document.createElement('button');
       appearInfoAll.textContent = '200개의 텍스트가 나오는 버튼';
 
@@ -45,7 +56,7 @@
       makeBold.style.marginLeft = '20px';
 
       makeBold.addEventListener('click',()=>{
-        if(root.children.length < 4){
+        if(root.children.length < 5){
           return;
         }
         root.style.fontWeight = 'bold';
@@ -86,6 +97,8 @@
 
       clearInfo.addEventListener('click',clearFiled);
 
+      root.appendChild(searchIdDiv);
+      
       root.appendChild(appearInfoAll);
 
       root.appendChild(clearInfo);
