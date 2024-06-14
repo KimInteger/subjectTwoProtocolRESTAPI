@@ -40,6 +40,9 @@
       makeBold.style.marginLeft = '50px';
 
       makeBold.addEventListener('click',()=>{
+        if(root.children.length < 10){
+          return;
+        }
         root.style.fontWeight = 'bold';
       });
 
