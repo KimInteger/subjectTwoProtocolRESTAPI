@@ -18,7 +18,9 @@
       }
       let result = xhr.responseText;
 
-      console.log(result);
+      let data = JSON.parse(result);
+
+      console.log(data);
     });
     xhr.send();
   </script>
