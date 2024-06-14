@@ -16,6 +16,7 @@
       } else {
         throw new Error('연결안됫수!',xhr.status);
       }
+      let result = xhr.responseText;
     });
     xhr.send();
   </script>
