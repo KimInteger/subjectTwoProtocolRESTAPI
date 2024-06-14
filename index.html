@@ -27,36 +27,64 @@
       */
     
       const root = document.getElementById('root');
+
       const appearInfo = document.createElement('button');
-      appearInfo.textContent = '200개의 텍스트가 나오는 버튼'
-      let info = '';
-      data.forEach((item)=>{
-        if(item.userId === 1){
-          info += `<h1>${item.title}</h1>`
-        } else if (item.userId === 2) {
-          info += `<h2>${item.title}</h2>`
-        } else if ( item.userId === 3 ) {
-          info += `<p style="color:red;">${item.title}</p>`
-        } else if ( item.userId === 4 ) {
-          info += `<p style="color:orange;">${item.title}</p>`
-        } else if ( item.userId === 5 ) {
-          info += `<p style="color:yellow;">${item.title}</p>`
-        } else if ( item.userId === 6 ) {
-          info += `<p style="color:green;">${item.title}</p>`
-        } else if ( item.userId === 7 ) {
-          info += `<p style="color:blue;">${item.title}</p>`
-        } else if ( item.userId === 8 ) {
-          info += `<p style="color:darkblue;">${item.title}</p>`
-        } else if ( item.userId === 9 ) {
-          info += `<p style="color:violet;">${item.title}</p>`
-        } else {
-          info += `<p style="color:bisque;">${item.title}</p>`
-        }
+      appearInfo.textContent = '200개의 텍스트가 나오는 버튼';
+
+      const clearInfo = document.createElement('button');
+      clearInfo.textContent = '지우기';
+      clearInfo.style.marginLeft = '50px';
+
+      const makeBold = document.createElement('button');
+      makeBold.textContent = '굵게!';
+      makeBold.style.marginLeft = '50px';
+
+      makeBold.addEventListener('click',()=>{
+        root.style.fontWeight = 'bold';
       });
-      appearInfo.addEventListener('click',()=>{
-        root.innerHTML = info;
+
+      function clearFiled() {
+        root.textContent = '';
+        root.style.fontWeight = '';
+        appearInfo.addEventListener('click', appearText);
+        appearInfo.addEventListener('click', ()=>{
+        setTimeout(()=>{
+          appearInfo.removeEventListener('click',appearText);
+          },16);
+        });
+
+        root.appendChild(appearInfo);
+        root.appendChild(clearInfo);
+        root.appendChild(makeBold);
+      }
+
+      function appearText() {
+        let userid = [1,2,3,4,5,6,7,8,9,10];
+        let tColor = ['red','orange','yellow','green','skyblue','blue','darkblue','purple','violet','whitesmoke']
+        data.forEach((item)=>{
+          let info = document.createElement('p');
+          if( item.userId === userid[item.userId - 1] ) {
+            info.textContent = item.title;
+            info.style.color = tColor[item.userId - 1];
+            root.appendChild(info);
+          }
+        });
+      };
+      
+      appearInfo.addEventListener('click', appearText);
+      appearInfo.addEventListener('click', ()=>{
+        setTimeout(()=>{
+          appearInfo.removeEventListener('click',appearText);
+        },1000);
       });
-      root.append(appearInfo);
+
+      clearInfo.addEventListener('click',clearFiled);
+
+      root.appendChild(appearInfo);
+
+      root.appendChild(clearInfo);
+
+      root.appendChild(makeBold);
     });
     xhr.send();
   </script>
