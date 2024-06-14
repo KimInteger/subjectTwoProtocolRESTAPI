@@ -9,7 +9,15 @@
   <div id="root"></div>
   <script>
     const xhr = new XMLHttpRequest();
-    console.log(xhr);
+    xhr.open('GET','https://jsonplaceholder.typicode.com/');
+    xhr.addEventListener('load',()=>{
+      if (xhr.status === 200) {
+        console.log('연결 되었다!');
+      } else {
+        throw new Error('연결안됫수!',xhr.status);
+      }
+    });
+    xhr.send();
   </script>
 </body>
 </html>
