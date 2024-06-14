@@ -1,0 +1,11 @@
+{
+  "name": "subjecttwoprotocolrestapi",
+  "version": "1.0.0",
+  "description": "\"원활한 프로덕트 제작을 위해 버전 제어 환경을 구축, 진행할 수 있다.\"",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "KimInteger",
+  "license": "MIT"
+}
