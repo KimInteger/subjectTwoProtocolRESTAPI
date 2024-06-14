@@ -10,7 +10,11 @@ xhr.send();
 
 xhr.addEventListener('load',()=>{
   if(xhr.status === 200){
-    console.log(1);
+    let result = xhr.responseText;
+    let data = JSON.parse(result);
+    console.log(data);
+    
+    
   } else {
     throw new Error('에러가 발생:' + xhr.status);
   }
