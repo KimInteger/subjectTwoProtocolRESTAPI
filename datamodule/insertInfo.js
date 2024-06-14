@@ -8,5 +8,14 @@ xhr.open('get','https://jsonplaceholder.typicode.com/todos');
 
 xhr.send();
 
+xhr.addEventListener('load',()=>{
+  if(xhr.status === 200){
+    console.log(1);
+  } else {
+    throw new Error('에러가 발생:' + xhr.status);
+  }
+});
+
+
 
 
