@@ -6,7 +6,12 @@
   <title>네트워크 및 API</title>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <div>
+      <input type="number" placeholder="1~200까지의 숫자를 입력해보세요!">
+      <button>tilte출력</button>
+    </div>
+  </div>
   <script>
     const xhr = new XMLHttpRequest();
     xhr.open('GET','https://jsonplaceholder.typicode.com/todos');
@@ -33,11 +38,11 @@
 
       const clearInfo = document.createElement('button');
       clearInfo.textContent = '지우기';
-      clearInfo.style.marginLeft = '50px';
+      clearInfo.style.marginLeft = '20px';
 
       const makeBold = document.createElement('button');
       makeBold.textContent = '굵게!';
-      makeBold.style.marginLeft = '50px';
+      makeBold.style.marginLeft = '20px';
 
       makeBold.addEventListener('click',()=>{
         if(root.children.length < 4){
