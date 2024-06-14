@@ -4,5 +4,8 @@ const template = {
   },
   responseTemp : function(){
 
+  },
+  postTemp : function() {
+    
   }
 };
