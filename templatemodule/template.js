@@ -1,1 +1,8 @@
-console.log('template.js');
+const template = {
+  basicTemp : function(){
+
+  },
+  responseTemp : function(){
+
+  }
+};
