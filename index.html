@@ -64,7 +64,11 @@
 
       function searchIdToTitle() {
         if(Number(searchId.value) === data[Number(searchId.value)-1].id){
-          console.log(data[Number(searchId.value)-1].id);
+          clearFiled();
+          let searchTitle = document.createElement('p');
+          searchTitle.textContent = data[Number(searchId.value)-1].title;
+          root.appendChild(searchTitle);
+          searchId.value = '';
         } else {
           throw new Error('없는 숫자입니다.');
         }
@@ -84,12 +88,16 @@
         appearInfoAll.addEventListener('click', appearTextAll);
         appearInfoAll.addEventListener('click', removeAppear);
 
+        searchIdDiv.appendChild(searchId);
+        searchIdDiv.appendChild(searchIdBtn);
+        root.appendChild(searchIdDiv);
         root.appendChild(appearInfoAll);
         root.appendChild(clearInfo);
         root.appendChild(makeBold);
       }
 
       function appearTextAll() {
+        clearFiled();
         let userid = [1,2,3,4,5,6,7,8,9,10];
         let tColor = ['red','orange','yellow','green','skyblue','blue','darkblue','purple','violet','whitesmoke']
         data.forEach((item)=>{
