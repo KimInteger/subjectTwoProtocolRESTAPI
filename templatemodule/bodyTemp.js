@@ -6,3 +6,5 @@ const bodyTemp = function(content,script) {
   <script src="${script}"></script>
   `;
 }
+
+module.exports = bodyTemp;
