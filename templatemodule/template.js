@@ -1,6 +1,9 @@
-const template = {
-  basicTemp : function(){
+const bodyTemp = require('./bodyTemp');
+const headTemp = require('./headTemp');
 
+const template = {
+  basicTemp : function(title, css, content, script){
+    return `${headTemp(title,css)}` + `${bodyTemp(content,script)}`;
   },
   responseTemp : function(){
 
@@ -9,3 +12,5 @@ const template = {
     
   }
 };
+
+module.exports=template;
