@@ -23,7 +23,12 @@
         if(xhr.status === 200){
           console.log('데이터 받음');
           console.dir(xhr);
-          console.log(JSON.parse(xhr.responseText));
+          let result = JSON.parse(xhr.responseText);
+          result.forEach((item) => {
+            const p = document.createElement('p');
+            p.textContent = item.title;
+            root.appendChild(p);
+          });
         } else {
           console.log(xhr.status);
         }
