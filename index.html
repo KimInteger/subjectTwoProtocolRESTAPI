@@ -24,11 +24,114 @@
           console.log('데이터 받음');
           console.dir(xhr);
           let result = JSON.parse(xhr.responseText);
-          result.forEach((item) => {
-            const p = document.createElement('p');
-            p.textContent = item.title;
-            root.appendChild(p);
+
+        // ================ DOM API 조작 부분 ====================
+    
+        const root = document.getElementById('root');
+
+        // search Id 부분
+
+        const searchIdDiv = document.createElement('div');
+        searchIdDiv.style.height = '100px';
+        searchIdDiv.style.alignContent = 'center';
+
+        const searchId = document.createElement('input');
+        searchId.setAttribute('type','text');
+        searchId.setAttribute('placeholder','1~200까지의 숫자를 입력해주세요.');
+        searchId.style.width = '250px';
+
+        const searchIdBtn = document.createElement('button');
+        searchIdBtn.textContent = 'title을 출력';
+        searchIdBtn.style.marginLeft = '20px';
+
+        searchIdDiv.appendChild(searchId);
+        searchIdDiv.appendChild(searchIdBtn);
+
+        // btn관련 style할당
+
+        const appearInfoAll = document.createElement('button');
+        appearInfoAll.textContent = '200개의 텍스트가 나오는 버튼';
+
+        const clearInfo = document.createElement('button');
+        clearInfo.textContent = '지우기';
+        clearInfo.style.marginLeft = '20px';
+
+        const makeBold = document.createElement('button');
+        makeBold.textContent = '굵게!';
+        makeBold.style.marginLeft = '20px';
+
+
+        // 함수 선언 및 이벤트 할당
+
+        function searchIdToTitle() {
+          if(Number(searchId.value) === result[Number(searchId.value)-1].id){
+            clearFiled();
+            let searchTitle = document.createElement('p');
+            searchTitle.textContent = result[Number(searchId.value)-1].title;
+            root.appendChild(searchTitle);
+            searchId.value = '';
+          } else {
+            throw new Error('없는 숫자입니다.');
+          }
+        }
+
+        searchIdBtn.addEventListener('click', searchIdToTitle);
+
+        function removeAppear() {
+          setTimeout(()=>{
+            appearInfoAll.removeEventListener('click',appearTextAll);
+            },16);
+        }
+
+        function clearFiled() {
+          root.innerHTML = `<button id="read">readConsole</button>`;
+          root.style.fontWeight = '';
+          appearInfoAll.addEventListener('click', appearTextAll);
+          appearInfoAll.addEventListener('click', removeAppear);
+
+          searchIdDiv.appendChild(searchId);
+          searchIdDiv.appendChild(searchIdBtn);
+          root.appendChild(searchIdDiv);
+          root.appendChild(appearInfoAll);
+          root.appendChild(clearInfo);
+          root.appendChild(makeBold);
+        }
+
+        function appearTextAll() {
+          clearFiled();
+          let userid = [1,2,3,4,5,6,7,8,9,10];
+          let tColor = ['red','orange','yellow','green','skyblue','blue','darkblue','purple','violet','whitesmoke']
+          result.forEach((item)=>{
+            let info = document.createElement('p');
+            if( item.userId === userid[item.userId - 1] ) {
+              info.textContent = item.title;
+              info.style.color = tColor[item.userId - 1];
+              root.appendChild(info);
+            }
           });
+        };
+
+        makeBold.addEventListener('click',()=>{
+          if(root.children.length < 5){
+            return;
+          }
+          root.style.fontWeight = 'bold';
+        });
+
+        appearInfoAll.addEventListener('click', appearTextAll);
+        appearInfoAll.addEventListener('click', removeAppear);
+
+        clearInfo.addEventListener('click',clearFiled);
+
+        // root에 append하는부분
+
+        root.appendChild(searchIdDiv);
+
+        root.appendChild(appearInfoAll);
+
+        root.appendChild(clearInfo);
+
+        root.appendChild(makeBold);
         } else {
           console.log(xhr.status);
         }
