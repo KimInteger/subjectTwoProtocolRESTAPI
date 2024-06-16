@@ -18,6 +18,16 @@
 
       xhr.open('POST','/readDB');
       xhr.send();
+
+      xhr.addEventListener('load',()=>{
+        if(xhr.status === 200){
+          console.log('데이터 받음');
+          console.dir(xhr);
+          console.log(JSON.parse(xhr.responseText));
+        } else {
+          console.log(xhr.status);
+        }
+      });
     });
   </script>
 </body>
