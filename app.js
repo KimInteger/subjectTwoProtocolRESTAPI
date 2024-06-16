@@ -51,24 +51,19 @@ const server = http.createServer((req,res)=>{
   } else if ( req.method === 'POST'){
     if(req.url === '/readDB') {
       let testA = [];
-      async function a() {
-        const db = new sqlite3.Database('./database/info.db');
-        db.all("SELECT * FROM info",(err,rows)=>{
-          if(err){
-            throw new Error('에러가 발생');
-          } else {
-            rows.forEach((row)=>{
-              testA.push(row);
-            });
-            console.log(JSON.stringify(testA,null,2));
-  
-          }
-        });
-        db.close();
-      }
-      a();
-      res.writeHead(200,{"Content-Type":'text/plain; charset=UTF-8'});
-      res.end(temp.basicTemp('테스트','/test.css',JSON.stringify(testA,null,2)),'/test.js');
+      const db = new sqlite3.Database('./database/info.db');
+      db.all("SELECT * FROM info",(err,rows)=>{
+        if(err){
+          throw new Error('에러가 발생');
+        } else {
+          rows.forEach((row)=>{
+            testA.push(row);
+          });
+          res.writeHead(200,{"Content-Type":"text/plain; charset=UTF-8"});
+          res.end(JSON.stringify(testA,null,2));
+        }
+      });
+      db.close();
     } else {
       res.writeHead(404,{"Content-Type":"text/plain; charset=UTF-8"});
       res.end("페이지를 찾을 수 없습니다.");  
